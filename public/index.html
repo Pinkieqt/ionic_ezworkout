@@ -28,7 +28,12 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   </head>
 
-  <body>
+  <body onload="loadTheme()">
     <div id="root"></div>
   </body>
+  <script>
+    function loadTheme() {
+      document.body.setAttribute("color-theme", localStorage.getItem("theme"));
+    }
+  </script>
 </html>
