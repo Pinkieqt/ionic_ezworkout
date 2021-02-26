@@ -11,11 +11,10 @@ import {
   IonToolbar,
 } from "@ionic/react";
 import "./Settings.css";
-import { moon } from "ionicons/icons";
+import { moon, logOutOutline } from "ionicons/icons";
 
 const Settings: React.FC = () => {
   const [theme, setTheme] = useState(localStorage.getItem("theme"));
-  console.log(theme);
 
   return (
     <IonPage>
@@ -49,6 +48,16 @@ const Settings: React.FC = () => {
               }
             }}
           />
+        </IonItem>
+        <IonItem
+          lines="none"
+          button
+          onClick={() => {
+            console.log("odhlasit");
+          }}
+        >
+          <IonIcon slot="start" icon={logOutOutline} />
+          <IonLabel>Odhlásit</IonLabel>
         </IonItem>
       </IonContent>
     </IonPage>

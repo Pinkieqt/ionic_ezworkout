@@ -12,6 +12,7 @@ import {
   IonTabs,
 } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
+import { modalController } from "@ionic/core";
 import {
   homeOutline,
   fitnessOutline,
@@ -43,12 +44,13 @@ import Metrics from "./pages/Metrics";
 import Weights from "./pages/Weights";
 import Settings from "./pages/Settings";
 import { AddModal } from "./pages/AddModal";
+import ArrivalHistoryComponent from "./components/ArrivalHistoryComponent";
 
 const App: React.FC = () => {
   const [showModal, setShowModal] = useState(false);
-
   async function closeModal() {
-    await setShowModal(false);
+    await modalController.dismiss();
+    setShowModal(false);
   }
 
   return (
@@ -61,6 +63,7 @@ const App: React.FC = () => {
             <Route path="/metrics" component={Metrics} exact={true} />
             <Route path="/weights" component={Weights} exact={true} />
             <Route path="/settings" component={Settings} exact={true} />
+            <Route path="/history" component={ArrivalHistoryComponent} />
             <Route
               path="/"
               render={() => <Redirect to="/dashboard" />}
@@ -92,8 +95,6 @@ const App: React.FC = () => {
       {/* Append modal */}
       <IonModal isOpen={showModal} onDidDismiss={() => setShowModal(false)}>
         <AddModal closeAction={closeModal} />
-        {/* <p>This is modal content</p>
-        <IonButton onClick={() => setShowModal(false)}>Close Modal</IonButton> */}
       </IonModal>
       <IonFab vertical="bottom" horizontal="center" slot="fixed">
         <IonFabButton color="primary" onClick={() => setShowModal(true)}>

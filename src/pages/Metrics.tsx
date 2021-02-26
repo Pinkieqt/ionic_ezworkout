@@ -6,7 +6,6 @@ import {
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
-import ExploreContainer from "../components/ExploreContainer";
 import "./Metrics.css";
 
 const Metrics: React.FC = () => {
@@ -23,7 +22,6 @@ const Metrics: React.FC = () => {
             <IonTitle size="large">Metrics</IonTitle>
           </IonToolbar>
         </IonHeader>
-        <ExploreContainer name="Metrics" />
       </IonContent>
     </IonPage>
   );

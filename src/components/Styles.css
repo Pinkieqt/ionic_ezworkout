@@ -1,0 +1,12 @@
+.card_header_padding {
+  padding-top: 4px !important;
+}
+
+.card_title {
+  font-size: 20px !important;
+  text-align: left !important;
+}
+
+.card_chip {
+  font-size: 10px !important;
+}

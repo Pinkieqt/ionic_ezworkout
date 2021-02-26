@@ -1,0 +1,23 @@
+.margin-bottom-32 {
+  margin-bottom: 32px !important;
+}
+
+.weight-number-input {
+  font-size: 55px !important;
+}
+
+.year-number-input {
+  font-size: 32px !important;
+  text-align: center;
+}
+
+.place-button-down {
+  display: flex !important;
+  flex-flow: column !important;
+  background-color: black;
+}
+
+.row-down {
+  flex-grow: 1 !important;
+  background-color: red;
+}
