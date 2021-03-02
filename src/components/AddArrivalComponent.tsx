@@ -33,7 +33,7 @@ const AddArrivalComponent: React.FC<MyModalProps> = ({ closeAction }) => {
       {/* <IonText>
         <p>Níže lze vybrat jiné datum pro pozdější zápisy.</p>
       </IonText> */}
-      <IonItem>
+      <IonItem lines="none">
         <IonLabel>Datum</IonLabel>
         <IonDatetime
           value={selectedDate}

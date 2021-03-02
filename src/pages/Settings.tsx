@@ -1,15 +1,5 @@
 import React, { useState } from "react";
-import {
-  IonContent,
-  IonHeader,
-  IonIcon,
-  IonItem,
-  IonLabel,
-  IonPage,
-  IonTitle,
-  IonToggle,
-  IonToolbar,
-} from "@ionic/react";
+import { IonContent, IonHeader, IonIcon, IonItem, IonLabel, IonPage, IonTitle, IonToggle, IonToolbar } from "@ionic/react";
 import "./Settings.css";
 import { moon, logOutOutline } from "ionicons/icons";
 
@@ -20,13 +10,13 @@ const Settings: React.FC = () => {
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>ds</IonTitle>
+          <IonTitle>Nastavení</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
         <IonHeader collapse="condense">
           <IonToolbar>
-            <IonTitle size="large">Settings</IonTitle>
+            <IonTitle size="large">Nastavení</IonTitle>
           </IonToolbar>
         </IonHeader>
         <IonItem lines="none">
@@ -52,6 +42,7 @@ const Settings: React.FC = () => {
         <IonItem
           lines="none"
           button
+          routerLink="/login"
           onClick={() => {
             console.log("odhlasit");
           }}

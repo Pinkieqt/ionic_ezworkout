@@ -1,25 +1,9 @@
 import React, { useState } from "react";
 import { Redirect, Route } from "react-router-dom";
-import {
-  IonApp,
-  IonFab,
-  IonFabButton,
-  IonIcon,
-  IonModal,
-  IonRouterOutlet,
-  IonTabBar,
-  IonTabButton,
-  IonTabs,
-} from "@ionic/react";
+import { IonApp, IonFab, IonFabButton, IonIcon, IonModal, IonRouterOutlet, IonTabBar, IonTabButton, IonTabs } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
 import { modalController } from "@ionic/core";
-import {
-  homeOutline,
-  fitnessOutline,
-  fileTrayFullOutline,
-  cogOutline,
-  addOutline,
-} from "ionicons/icons";
+import { homeOutline, fitnessOutline, fileTrayFullOutline, cogOutline, addOutline } from "ionicons/icons";
 import Dashboard from "./pages/Dashboard";
 
 /* Core CSS required for Ionic components to work properly */
@@ -45,6 +29,7 @@ import Weights from "./pages/Weights";
 import Settings from "./pages/Settings";
 import { AddModal } from "./pages/AddModal";
 import ArrivalHistoryComponent from "./components/ArrivalHistoryComponent";
+import Login from "./pages/Login";
 
 const App: React.FC = () => {
   const [showModal, setShowModal] = useState(false);
@@ -64,11 +49,8 @@ const App: React.FC = () => {
             <Route path="/weights" component={Weights} exact={true} />
             <Route path="/settings" component={Settings} exact={true} />
             <Route path="/history" component={ArrivalHistoryComponent} />
-            <Route
-              path="/"
-              render={() => <Redirect to="/dashboard" />}
-              exact={true}
-            />
+            <Route path="/login" component={Login} />
+            <Route path="/" render={() => <Redirect to="/dashboard" />} exact={true} />
           </IonRouterOutlet>
           {/* TabBar */}
           <IonTabBar slot="bottom">
@@ -94,7 +76,7 @@ const App: React.FC = () => {
       </IonReactRouter>
       {/* Append modal */}
       <IonModal isOpen={showModal} onDidDismiss={() => setShowModal(false)}>
-        <AddModal closeAction={closeModal} />
+        <AddModal closeAction={closeModal} isItEditingModal={false} />
       </IonModal>
       <IonFab vertical="bottom" horizontal="center" slot="fixed">
         <IonFabButton color="primary" onClick={() => setShowModal(true)}>

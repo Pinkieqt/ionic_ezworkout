@@ -1,17 +1,4 @@
-import {
-  IonButton,
-  IonChip,
-  IonCol,
-  IonGrid,
-  IonInput,
-  IonItem,
-  IonLabel,
-  IonList,
-  IonRow,
-  IonSelect,
-  IonSelectOption,
-  IonText,
-} from "@ionic/react";
+import { IonButton, IonChip, IonCol, IonGrid, IonInput, IonItem, IonLabel, IonList, IonRow, IonSelect, IonSelectOption, IonText } from "@ionic/react";
 import React, { useState } from "react";
 import "./Modals.css";
 
@@ -21,9 +8,7 @@ type MyModalProps = {
 
 const AddWeightComponent: React.FC<MyModalProps> = ({ closeAction }) => {
   const [inputWeight, setInputWeight] = useState(33.3);
-  const [selectedUser, setSelectedUser] = useState(
-    localStorage.getItem("selectedUser")
-  );
+  const [selectedUser, setSelectedUser] = useState(localStorage.getItem("selectedUser"));
 
   return (
     <IonList className="ion-padding ion-text-center">
@@ -31,8 +16,9 @@ const AddWeightComponent: React.FC<MyModalProps> = ({ closeAction }) => {
       <IonText className="ion-margin-bottom">
         <p>Vyber se, zadej svou váhu a poté ulož změny.</p>
       </IonText>
+
       {/* Person picker + weight picker */}
-      <IonItem className="ion-margin-bottom">
+      <IonItem className="ion-margin-bottom" lines="none">
         <IonLabel>Uživatel</IonLabel>
         <IonSelect
           value={selectedUser}
@@ -48,37 +34,20 @@ const AddWeightComponent: React.FC<MyModalProps> = ({ closeAction }) => {
           <IonSelectOption value="dejvo">Dejvo</IonSelectOption>
         </IonSelect>
       </IonItem>
+
       {/* Input */}
       <IonGrid>
         <IonRow className="ion-align-items-center">
           <IonCol size="2">
-            <IonChip
-              outline
-              color="primary"
-              onClick={() =>
-                setInputWeight(Math.round((inputWeight - 0.1) * 10) / 10)
-              }
-            >
+            <IonChip outline color="primary" onClick={() => setInputWeight(Math.round((inputWeight - 0.1) * 10) / 10)}>
               <IonLabel>-</IonLabel>
             </IonChip>
           </IonCol>
           <IonCol size="8">
-            <IonInput
-              className="weight-number-input"
-              placeholder="váha"
-              type="number"
-              step="0.1"
-              value={inputWeight}
-            />
+            <IonInput className="weight-number-input" placeholder="váha" type="number" step="0.1" value={inputWeight} />
           </IonCol>
           <IonCol size="2">
-            <IonChip
-              outline
-              color="primary"
-              onClick={() =>
-                setInputWeight(Math.round((inputWeight + 0.1) * 10) / 10)
-              }
-            >
+            <IonChip outline color="primary" onClick={() => setInputWeight(Math.round((inputWeight + 0.1) * 10) / 10)}>
               <IonLabel>+</IonLabel>
             </IonChip>
           </IonCol>

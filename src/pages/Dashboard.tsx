@@ -1,21 +1,10 @@
 import React from "react";
-import {
-  IonButton,
-  IonContent,
-  IonHeader,
-  IonIcon,
-  IonItem,
-  IonList,
-  IonListHeader,
-  IonPage,
-  IonText,
-  IonTitle,
-  IonToolbar,
-} from "@ionic/react";
+import { IonButton, IonContent, IonHeader, IonIcon, IonItem, IonList, IonListHeader, IonPage, IonTitle, IonToolbar } from "@ionic/react";
 import "./Dashboard.css";
 import { arrowForwardOutline } from "ionicons/icons";
 import HeatMapComponent from "../components/HeatMapComponent";
 import CardComponent from "../components/CardComponent";
+import LastArrivalsComponent from "../components/LastArrivalsComponent";
 
 const Dashboard: React.FC = () => {
   return (
@@ -33,54 +22,36 @@ const Dashboard: React.FC = () => {
         </IonHeader>
         {/* Content */}
         <IonList>
-          <IonItem lines="none">
-            <CardComponent />
-          </IonItem>
+          <CardComponent isOnDashboard={true} />
 
+          {/* Charts */}
           <IonListHeader mode="ios">Příchody</IonListHeader>
           <IonItem lines="none">
-            <IonText>
-              <p>
-                V grafu níže lze pozorovat měsíční srovnání příchodů v
-                jednotlivých letech.
-              </p>
-            </IonText>
+            <p>V grafu níže lze pozorovat měsíční srovnání příchodů v jednotlivých letech.</p>
           </IonItem>
 
           <IonItem lines="none">
-            <IonText>
-              <p>Příchody jednotlivých členů</p>
-            </IonText>
+            <p>Příchody jednotlivých členů</p>
           </IonItem>
 
+          {/* Last arrivals */}
           <IonItem lines="none">
-            <IonText>
-              <p>Poslední příchody</p>
-            </IonText>
+            <p>Poslední příchody</p>
           </IonItem>
+
+          <LastArrivalsComponent />
 
           <IonListHeader mode="ios">Historie příchodů</IonListHeader>
           <IonItem lines="none">
-            <IonText>
-              <p>
-                Pro zobrazení historie příchodů a jejich správu, klikni na
-                tlačítko níže.
-              </p>
-            </IonText>
+            <p>Pro zobrazení historie příchodů a jejich správu, klikni na tlačítko níže.</p>
           </IonItem>
-          <IonButton
-            expand="block"
-            size="default"
-            fill="clear"
-            routerLink="/history"
-          >
+          <IonButton expand="block" size="default" fill="clear" routerLink="/history">
             Historie/správa příchodů <IonIcon icon={arrowForwardOutline} />
           </IonButton>
 
+          {/* Heat map */}
           <IonListHeader mode="ios">Heat mapa</IonListHeader>
-          <IonItem lines="none">
-            <HeatMapComponent />
-          </IonItem>
+          <HeatMapComponent />
         </IonList>
       </IonContent>
     </IonPage>
