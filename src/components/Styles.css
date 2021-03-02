@@ -40,3 +40,11 @@
 .heatmap-year {
   font-size: 35px !important;
 }
+
+/* Loading component */
+.spinner {
+  text-align: center;
+  position: fixed;
+  left: 47%;
+  top: 45%;
+}

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Redirect, Route } from "react-router-dom";
 import { IonApp, IonFab, IonFabButton, IonIcon, IonModal, IonRouterOutlet, IonTabBar, IonTabButton, IonTabs } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
@@ -30,60 +30,82 @@ import Settings from "./pages/Settings";
 import { AddModal } from "./pages/AddModal";
 import ArrivalHistoryComponent from "./components/ArrivalHistoryComponent";
 import Login from "./pages/Login";
+import UserProvider, { UserContext } from "./utilities/UserProvider";
+import { auth } from "./utilities/Firebase";
 
 const App: React.FC = () => {
   const [showModal, setShowModal] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    auth.onAuthStateChanged((userAuth) => {
+      if (userAuth) {
+        setIsLoggedIn(true);
+      } else {
+        setIsLoggedIn(false);
+      }
+    });
+  });
+
   async function closeModal() {
     await modalController.dismiss();
     setShowModal(false);
   }
 
   return (
-    <IonApp>
-      <IonReactRouter>
-        <IonTabs>
-          {/* Router */}
-          <IonRouterOutlet>
-            <Route path="/dashboard" component={Dashboard} exact={true} />
-            <Route path="/metrics" component={Metrics} exact={true} />
-            <Route path="/weights" component={Weights} exact={true} />
-            <Route path="/settings" component={Settings} exact={true} />
-            <Route path="/history" component={ArrivalHistoryComponent} />
-            <Route path="/login" component={Login} />
-            <Route path="/" render={() => <Redirect to="/dashboard" />} exact={true} />
-          </IonRouterOutlet>
-          {/* TabBar */}
-          <IonTabBar slot="bottom">
-            <IonTabButton tab="dashboard" href="/dashboard">
-              <IonIcon icon={homeOutline} />
-              {/* <IonLabel>Home</IonLabel> */}
-            </IonTabButton>
-            <IonTabButton tab="metrics" href="/metrics">
-              <IonIcon icon={fitnessOutline} />
-              {/* <IonLabel>Metriky</IonLabel> */}
-            </IonTabButton>
-            <IonTabButton></IonTabButton>
-            <IonTabButton tab="weights" href="/weights">
-              <IonIcon icon={fileTrayFullOutline} />
-              {/* <IonLabel>Váha</IonLabel> */}
-            </IonTabButton>
-            <IonTabButton tab="settings" href="/settings">
-              <IonIcon icon={cogOutline} />
-              {/* <IonLabel>Nastavení</IonLabel> */}
-            </IonTabButton>
-          </IonTabBar>
-        </IonTabs>
-      </IonReactRouter>
-      {/* Append modal */}
-      <IonModal isOpen={showModal} onDidDismiss={() => setShowModal(false)}>
-        <AddModal closeAction={closeModal} isItEditingModal={false} />
-      </IonModal>
-      <IonFab vertical="bottom" horizontal="center" slot="fixed">
-        <IonFabButton color="primary" onClick={() => setShowModal(true)}>
-          <IonIcon icon={addOutline} />
-        </IonFabButton>
-      </IonFab>
-    </IonApp>
+    <UserProvider>
+      <IonApp>
+        {isLoggedIn ? (
+          <>
+            <IonReactRouter>
+              <IonTabs>
+                {/* Router */}
+                <IonRouterOutlet>
+                  <Route path="/dashboard" component={Dashboard} exact={true} />
+                  <Route path="/metrics" component={Metrics} exact={true} />
+                  <Route path="/weights" component={Weights} exact={true} />
+                  <Route path="/settings" component={Settings} exact={true} />
+                  <Route path="/history" component={ArrivalHistoryComponent} />
+                  <Route path="/login" component={Login} />
+                  <Route path="/" render={() => <Redirect to="/dashboard" />} exact={true} />
+                </IonRouterOutlet>
+                {/* TabBar */}
+                <IonTabBar slot="bottom">
+                  <IonTabButton tab="dashboard" href="/dashboard">
+                    <IonIcon icon={homeOutline} />
+                    {/* <IonLabel>Home</IonLabel> */}
+                  </IonTabButton>
+                  <IonTabButton tab="metrics" href="/metrics">
+                    <IonIcon icon={fitnessOutline} />
+                    {/* <IonLabel>Metriky</IonLabel> */}
+                  </IonTabButton>
+                  <IonTabButton></IonTabButton>
+                  <IonTabButton tab="weights" href="/weights">
+                    <IonIcon icon={fileTrayFullOutline} />
+                    {/* <IonLabel>Váha</IonLabel> */}
+                  </IonTabButton>
+                  <IonTabButton tab="settings" href="/settings">
+                    <IonIcon icon={cogOutline} />
+                    {/* <IonLabel>Nastavení</IonLabel> */}
+                  </IonTabButton>
+                </IonTabBar>
+              </IonTabs>
+            </IonReactRouter>
+            {/* Append modal */}
+            <IonModal isOpen={showModal} onDidDismiss={() => setShowModal(false)}>
+              <AddModal closeAction={closeModal} isItEditingModal={false} />
+            </IonModal>
+            <IonFab vertical="bottom" horizontal="center" slot="fixed">
+              <IonFabButton color="primary" onClick={() => setShowModal(true)}>
+                <IonIcon icon={addOutline} />
+              </IonFabButton>
+            </IonFab>
+          </>
+        ) : (
+          <Login />
+        )}
+      </IonApp>
+    </UserProvider>
   );
 };
 

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { IonContent, IonHeader, IonIcon, IonItem, IonLabel, IonPage, IonTitle, IonToggle, IonToolbar } from "@ionic/react";
 import "./Settings.css";
 import { moon, logOutOutline } from "ionicons/icons";
+import { logoutGoogle } from "../utilities/Firebase";
 
 const Settings: React.FC = () => {
   const [theme, setTheme] = useState(localStorage.getItem("theme"));
@@ -44,7 +45,7 @@ const Settings: React.FC = () => {
           button
           routerLink="/login"
           onClick={() => {
-            console.log("odhlasit");
+            logoutGoogle();
           }}
         >
           <IonIcon slot="start" icon={logOutOutline} />
