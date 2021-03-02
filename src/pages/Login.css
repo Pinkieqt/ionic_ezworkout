@@ -1,0 +1,24 @@
+.login-bg {
+  /* --background: linear-gradient(to top, #4481eb 0%, #04befe 100%); */
+  /* --background: url(/src/images/test.svg); */
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -5;
+  width: 100%;
+  /* 
+        <img src={image} className="login-bg" /> */
+}
+
+.ionitem-bg {
+  --background: rgba(0, 0, 0, 0);
+}
+
+.hello-text {
+  font-size: 55px !important;
+}
+
+.go-down-please {
+  position: fixed;
+  bottom: 7vh;
+}
