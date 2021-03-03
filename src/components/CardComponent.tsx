@@ -3,9 +3,10 @@ import React from "react";
 
 type CardProps = {
   isOnDashboard: Boolean;
+  cardsContent: any;
 };
 
-const CardComponent: React.FC<CardProps> = ({ isOnDashboard }) => {
+const CardComponent: React.FC<CardProps> = ({ isOnDashboard, cardsContent }) => {
   return (
     <>
       {isOnDashboard ? (
@@ -14,16 +15,16 @@ const CardComponent: React.FC<CardProps> = ({ isOnDashboard }) => {
             <IonCol>
               <IonCard mode="ios" className="ion-no-margin" color="primary">
                 <IonCardHeader>
-                  <IonCardSubtitle>deadlift</IonCardSubtitle>
-                  <IonCardTitle>675</IonCardTitle>
+                  <IonCardSubtitle>celkem příchodů</IonCardSubtitle>
+                  <IonCardTitle>{cardsContent.total}</IonCardTitle>
                 </IonCardHeader>
               </IonCard>
             </IonCol>
             <IonCol>
               <IonCard mode="ios" className="ion-no-margin" color="secondary">
                 <IonCardHeader>
-                  <IonCardSubtitle>deadlift</IonCardSubtitle>
-                  <IonCardTitle>675</IonCardTitle>
+                  <IonCardSubtitle>rozdíl příchodů</IonCardSubtitle>
+                  <IonCardTitle>{cardsContent.monthDiffer}</IonCardTitle>
                 </IonCardHeader>
               </IonCard>
             </IonCol>
@@ -32,16 +33,16 @@ const CardComponent: React.FC<CardProps> = ({ isOnDashboard }) => {
             <IonCol>
               <IonCard mode="ios" className="ion-no-margin" color="warning">
                 <IonCardHeader>
-                  <IonCardSubtitle>deadlift</IonCardSubtitle>
-                  <IonCardTitle>675</IonCardTitle>
+                  <IonCardSubtitle>tento rok</IonCardSubtitle>
+                  <IonCardTitle>{cardsContent.thisYear}</IonCardTitle>
                 </IonCardHeader>
               </IonCard>
             </IonCol>
             <IonCol>
               <IonCard mode="ios" className="ion-no-margin" color="danger">
                 <IonCardHeader>
-                  <IonCardSubtitle>deadlift</IonCardSubtitle>
-                  <IonCardTitle>675</IonCardTitle>
+                  <IonCardSubtitle>poslední příchod</IonCardSubtitle>
+                  <IonCardTitle>{cardsContent.latest}</IonCardTitle>
                 </IonCardHeader>
               </IonCard>
             </IonCol>

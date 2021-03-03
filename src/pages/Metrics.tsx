@@ -38,7 +38,7 @@ const Metrics: React.FC = () => {
       <IonContent fullscreen>
         {/* Content */}
         <IonList>
-          <CardComponent isOnDashboard={false} />
+          <CardComponent isOnDashboard={false} cardsContent={null} />
 
           {/* Person picker */}
           <IonItem lines="none" className="ion-margin-top">

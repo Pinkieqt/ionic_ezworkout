@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import { Redirect, Route } from "react-router-dom";
 import { IonApp, IonFab, IonFabButton, IonIcon, IonModal, IonRouterOutlet, IonTabBar, IonTabButton, IonTabs } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
@@ -30,14 +30,16 @@ import Settings from "./pages/Settings";
 import { AddModal } from "./pages/AddModal";
 import ArrivalHistoryComponent from "./components/ArrivalHistoryComponent";
 import Login from "./pages/Login";
-import { auth } from "./utilities/Firebase";
+import { auth, firestore } from "./utilities/Firebase";
 import LoadingComponent from "./components/LoadingComponent";
-import { DataContext } from "./utilities/DataContext";
+
+export const DataContext = createContext<any>(null);
 
 const App: React.FC = () => {
   const [showModal, setShowModal] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [usersData, setData] = useState<any>(null);
 
   useEffect(() => {
     auth.onAuthStateChanged((userAuth) => {
@@ -46,9 +48,22 @@ const App: React.FC = () => {
       } else {
         setIsLoggedIn(false);
       }
+
+      if (isLoggedIn === true) {
+        firestore.collection("users").onSnapshot((serverUpdate) => {
+          const users = serverUpdate.docs.map((_doc) => {
+            const data = _doc.data();
+            data["id"] = _doc.id;
+            return data;
+          });
+          setData(users);
+        });
+      } else {
+        setData(null);
+      }
       setIsLoading(false);
     });
-  });
+  }, [isLoggedIn]);
 
   async function closeModal() {
     await modalController.dismiss();
@@ -56,7 +71,7 @@ const App: React.FC = () => {
   }
 
   return (
-    <DataContext>
+    <DataContext.Provider value={usersData}>
       <IonApp>
         {isLoading ? (
           <LoadingComponent />
@@ -143,7 +158,7 @@ const App: React.FC = () => {
           </>
         )}
       </IonApp>
-    </DataContext>
+    </DataContext.Provider>
   );
 };
 
