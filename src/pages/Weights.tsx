@@ -27,18 +27,12 @@ const Weights: React.FC = () => {
 
   return (
     <IonPage>
-      <IonHeader>
+      <IonHeader translucent>
         <IonToolbar>
           <IonTitle>Váhy</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
-        <IonHeader collapse="condense">
-          <IonToolbar>
-            <IonTitle size="large">Váhy</IonTitle>
-          </IonToolbar>
-        </IonHeader>
-
         {/* Person picker */}
         <IonItem lines="none">
           <IonLabel>Uživatel</IonLabel>

@@ -2,17 +2,18 @@ import { IonButton, IonCheckbox, IonContent, IonGrid, IonIcon, IonInput, IonItem
 import { keyOutline, logInOutline } from "ionicons/icons";
 import React, { useContext, useState } from "react";
 import "./Login.css";
-import image from "../images/small-login-bg.svg";
-import { auth, signInWithGoogle } from "../utilities/Firebase";
+import { signInWithGoogle } from "../utilities/Firebase";
+import { useHistory } from "react-router";
 
 const Login: React.FC = () => {
   const [checked, setChecked] = useState(false);
   const [pass, setPass] = useState<any>("");
+  const history = useHistory();
 
   return (
     <IonPage>
       <IonContent fullscreen className="login-bg ion-padding">
-        <img src={image} className="login-bg" />
+        {/* <img src={image} className="login-bg" /> */}
         <div className="go-down-please">
           <h1 className="ion-text-center hello-text">Hello</h1>
           <p className="ion-text-center ion-margin-bottom">gym journal</p>
@@ -34,6 +35,7 @@ const Login: React.FC = () => {
             className="ion-margin"
             onClick={() => {
               signInWithGoogle(pass, checked);
+              history.push("/dashboard");
             }}
           >
             <IonIcon icon={logInOutline} slot="end"></IonIcon>

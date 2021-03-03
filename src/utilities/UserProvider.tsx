@@ -1,19 +1,20 @@
-import React, { createContext, useEffect, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import { auth } from "./Firebase";
 
-export const UserContext = createContext({ user: null }); //create context
+export const UserContext = createContext(null); //create context
 
 //now create actual component which holds context
 const UserProvider: React.FC = ({ children }) => {
-  const [user, setUser] = useState<any | null>(null);
+  const [currentUser, setCurrentUser] = useState<any | null>(null);
 
   useEffect(() => {
-    auth.onAuthStateChanged((userAuth) => {
-      setUser(userAuth);
+    auth.onAuthStateChanged((authUser) => {
+      setCurrentUser(authUser);
     });
-  });
+    console.log(currentUser);
+  }, [currentUser]);
 
-  return <UserContext.Provider value={{ user }}>{children}</UserContext.Provider>;
+  return <UserContext.Provider value={currentUser}>{children}</UserContext.Provider>;
 };
 
 export default UserProvider;

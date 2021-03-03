@@ -3,8 +3,8 @@ import React from "react";
 
 const LoadingComponent: React.FC = () => {
   return (
-    <IonContent>
-      <IonSpinner name="crescent" className="spinner" />
+    <IonContent className="load-bg">
+      <IonSpinner name="crescent" className="spinner" color="primary" />
     </IonContent>
   );
 };

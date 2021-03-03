@@ -9,17 +9,13 @@ const Settings: React.FC = () => {
 
   return (
     <IonPage>
-      <IonHeader>
+      <IonHeader translucent>
         <IonToolbar>
           <IonTitle>Nastavení</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
-        <IonHeader collapse="condense">
-          <IonToolbar>
-            <IonTitle size="large">Nastavení</IonTitle>
-          </IonToolbar>
-        </IonHeader>
+        {/* Content */}
         <IonItem lines="none">
           <IonIcon slot="start" icon={moon} />
           <IonLabel>Dark Mode</IonLabel>

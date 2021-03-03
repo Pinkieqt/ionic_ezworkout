@@ -30,18 +30,12 @@ const Metrics: React.FC = () => {
 
   return (
     <IonPage>
-      <IonHeader>
+      <IonHeader translucent>
         <IonToolbar>
           <IonTitle>Metriky</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
-        <IonHeader collapse="condense">
-          <IonToolbar>
-            <IonTitle size="large">Metriky</IonTitle>
-          </IonToolbar>
-        </IonHeader>
-
         {/* Content */}
         <IonList>
           <CardComponent isOnDashboard={false} />
